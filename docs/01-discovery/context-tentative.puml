@@ -1,0 +1,16 @@
+@startuml C4-Context — Exorsister
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title C4 Level 1 — Context — Exorsister (tentativo)
+
+Person(jugador, "Jugador", "Táctico/explorador/cazador en PC con teclado")
+System(exorsister, "Exorsister", "RPG por turnos roguelike en Godot 3D: semilla, vidas, libro, jefe + mal del mundo")
+System_Ext(so, "PC + Godot runtime", "Ejecución local 3D + input texto")
+System_Ext(disco, "Almacenamiento local", "Libro + barra del jefe (JSON)")
+
+Rel(jugador, exorsister, "Juega", "Teclado + UI")
+Rel(exorsister, so, "Corre en", "Godot 3D")
+Rel(exorsister, disco, "Persiste libro/barra", "Local")
+
+SHOW_LEGEND()
+@enduml
