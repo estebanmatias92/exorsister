@@ -1,18 +1,16 @@
 # AGENTS.md
 
-## Agent skills (OOAD)
+Exorsister — RPG por turnos roguelike. La idea vive en `docs/idea.md`. El PRD legacy en `docs/legacy-rup-discovery-phase/PRD.md` es una pista para la fase de grilling, no la fuente final de verdad.
 
-### Workflow profile
-
-Iterative RUP — Clean 4 Layers. See `docs/agents/workflow.md`.
+## Agent skills
 
 ### Issue tracker
 
 Local Markdown in `.scratch/`. See `docs/agents/issue-tracker.md`.
 
-### Architecture
+### Triage labels
 
-Clean 4 Layers. See `docs/agents/architecture.md`.
+Five canonical roles, defaults. See `docs/agents/triage-labels.md`.
 
 ### Domain docs
 

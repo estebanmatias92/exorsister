@@ -1,42 +1,51 @@
-# Domain Docs — Consumption Rules
+# Domain Docs
 
-How `ooad-*` skills consume domain docs.
+How the engineering skills should consume this repo's domain documentation when exploring the codebase.
 
-## Before Exploring, Read
+## Before exploring, read these
 
-- `CONTEXT.md` at root, or `CONTEXT-MAP.md` if it exists (points to a `CONTEXT.md` per context). Read each relevant one.
-- `docs/adr/` and `src/*/docs/adr/` if contexts exist.
+- **`GLOSSARY.md`** at the repo root, or
+- **`GLOSSARY-MAP.md`** at the repo root if it exists: it points at one `GLOSSARY.md` per context. Read each one relevant to the topic.
+- **`docs/adr/`**: read ADRs that touch the area you're about to work in. In multi-context repos, also check `src/<context>/docs/adr/` for context-scoped decisions.
 
-If none exist, proceed silently; `ooad-discover`/`ooad-requirements` create them lazily when the first term/decision is resolved.
+If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. The `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates them lazily when terms or decisions actually get resolved.
 
-## Structure
+## File structure
 
-Single-context (majority):
+Single-context repo (most repos):
 
 ```
-/ 
-├── CONTEXT.md
+/
+├── GLOSSARY.md
 ├── docs/adr/
-│   ├── 0001-clean-4-layer-architecture.md
+│   ├── 0001-event-sourced-orders.md
 │   └── 0002-postgres-for-write-model.md
 └── src/
 ```
 
-Multi-context (if `CONTEXT-MAP.md` exists):
+Multi-context repo (presence of `GLOSSARY-MAP.md` at the root):
 
 ```
-/ 
-├── CONTEXT-MAP.md
-├── docs/adr/                      ← system decisions
+/
+├── GLOSSARY-MAP.md
+├── docs/adr/                          ← system-wide decisions
 └── src/
-    ├── ordering/CONTEXT.md + docs/adr/
-    └── billing/CONTEXT.md + docs/adr/
+    ├── ordering/
+    │   ├── GLOSSARY.md
+    │   └── docs/adr/                  ← context-specific decisions
+    └── billing/
+        ├── GLOSSARY.md
+        └── docs/adr/
 ```
 
-## Use Glossary Vocabulary
+## Use the glossary's vocabulary
 
-Name concepts as in `CONTEXT.md`. Do not drift to discarded synonyms. If the concept does not exist, create an entry or reconsider.
+When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in `GLOSSARY.md`. Don't drift to synonyms the glossary explicitly avoids.
 
-## Flag Conflicts with ADR
+If the concept you need isn't in the glossary yet, that's a signal: either you're inventing language the project doesn't use (reconsider) or there's a real gap (note it for `/domain-modeling`).
 
-If your output contradicts an existing ADR, call it out: `Contradicts ADR-0002, but worth reopening because...`
+## Flag ADR conflicts
+
+If your output contradicts an existing ADR, surface it explicitly rather than silently overriding:
+
+> _Contradicts ADR-0007 (event-sourced orders), but worth reopening because…_
